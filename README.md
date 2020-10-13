@@ -31,7 +31,11 @@ gss <- gss %>% mutate(sex = ifelse(sex == "Female", 1, 0))
 # $75,000 to $99,999 == 3
 # $100,000 to 124,999 == 4
 # $125,000 and more == 5
-gss <- gss %>% mutate(income_respondent = ifelse(income_respondent == "Less than $25,000", 0, ifelse(income_respondent == "$25,000 to $49,999", 1, ifelse(income_respondent == "$50,000 to $74,999", 2, ifelse(income_respondent == "$75,000 to $99,999", 3, ifelse(income_respondent == "$100,000 to $ 124,999", 4, 5))))))
+gss <- gss %>% mutate(income_respondent = ifelse(income_respondent == "Less than $25,000", 0, 
+ifelse(income_respondent == "$25,000 to $49,999", 1, 
+ifelse(income_respondent == "$50,000 to $74,999", 2, 
+ifelse(income_respondent == "$75,000 to $99,999", 3, 
+ifelse(income_respondent == "$100,000 to $ 124,999", 4, 5))))))
 
 
 # Regression Estimation
