@@ -38,7 +38,7 @@ ifelse(income_respondent == "$75,000 to $99,999", 3,
 ifelse(income_respondent == "$100,000 to $ 124,999", 4, 5))))))
 
 
-# Regression Estimation
+# Regression Estimation 
 n <- as.numeric(length(gss$sex))
 N <- 30302287
 fpc.gss <- rep(N, n) # finite population correction
