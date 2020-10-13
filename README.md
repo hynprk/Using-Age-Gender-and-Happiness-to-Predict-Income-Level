@@ -34,11 +34,11 @@ gss <- gss %>% mutate(sex = ifelse(sex == "Female", 1, 0))
 gss <- gss %>% mutate(income_respondent = ifelse(income_respondent == "Less than $25,000", 0, ifelse(income_respondent == "$25,000 to $49,999", 1, ifelse(income_respondent == "$50,000 to $74,999", 2, ifelse(income_respondent == "$75,000 to $99,999", 3, ifelse(income_respondent == "$100,000 to $ 124,999", 4, 5))))))
 
 
-# Logit function
+# Regression Estimation
 n <- as.numeric(length(gss$sex))
 N <- 30302287
-fpc.gss <- rep(N, n)
+fpc.gss <- rep(N, n) # finite population correction
 gss.design <- svydesign(id = ~1, data = gss, fpc = fpc.gss)
-gss.log <- svyglm(income_respondent ~ age + as.factor(sex), gss.design)
-summary(gss.log)
+gss.reg <- svyglm(income_respondent ~ age + as.factor(sex), gss.design) # logit function cannot be applicable because outcome (y) is not binary
+summary(gss.reg)
 ```
