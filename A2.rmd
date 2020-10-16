@@ -1,6 +1,6 @@
 ---
 title: "STA304-A2"
-author: "Shlok Somani"
+author: "James Bai, Pamela De Vera, Hyoeun Park, Shlok Somani"
 date: "10/15/2020"
 output: pdf_document
 ---
