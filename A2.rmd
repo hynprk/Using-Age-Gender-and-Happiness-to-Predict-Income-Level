@@ -101,8 +101,6 @@ incsex_bar
 
 # Table
 kable(gssdata %>% group_by(sex) %>% summarize("High Income" = sum(income_level == "High"), "Low Income" = sum(income_level == "Low"), "High Income Percentage" = round(sum(income_level == "High")/n(), 2), "Low Income Percentage" = round(sum(income_level == "Low")/n(), 2), "Total" = n()))
-# sum(gssdata$sex=="Female") # 11068
-# sum(gssdata$sex=="Male") # 9263
 
 gssdata %>% 
   ggplot(aes(x = sex, group=as.factor(income_respondent))) + 
