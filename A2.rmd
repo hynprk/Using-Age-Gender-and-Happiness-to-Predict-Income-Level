@@ -19,6 +19,8 @@ library(survey)
 library(knitr)
 library(arm)
 
+######################################################################################################
+
 # Data Cleaning
 gssdata <- read.csv("gss.csv")
 
