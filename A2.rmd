@@ -102,20 +102,14 @@ incfeel_bar <- gssdata %>%
   scale_color_brewer(palette="RdYlBu") + 
   labs(title = "Satisfaction towards Life of Each Income Group", x = "Income Level", y = "Proportion", fill = "Satisfaction towards Life", color = "Satisfaction towards Life", caption = "Figure 2") +
   facet_grid(~income_level) + scale_y_continuous(labels = scales::percent) +
-  geom_text(aes( label = scales::percent(..prop..),
+  geom_text(aes(label = scales::percent(round(..prop.., 3)),
                    y= ..prop.. ), stat= "count", vjust = -.5, size = 1.5) +
   theme_minimal() + theme(plot.title = element_text(hjust = 0.5)) + theme(plot.caption = element_text(hjust = 0.5))
 
  # Table
-table2 <- kable(gssdata %>% group_by(income_level) %>% summarize(Mean = round(mean(feelings_life), 4), Q1 = quantile(feelings_life, 0.25), 
-Median = median(feelings_life), Q3 = quantile(feelings_life, 0.75), 
-IQR = IQR(feelings_life), 
-Outliers = sum(feelings_life < quantile(feelings_life, 0.25) - IQR(feelings_life)*1.5 | feelings_life > quantile(feelings_life, 0.75) + IQR(feelings_life)*1.5), 
-"Standard Deviation" = round(sd(feelings_life), 4), 
-Total = n()), 
-caption = "Table 2: Statistics of Satisfaction towards Life (by Income Group)")
+table2 <- kable(gssdata %>% group_by(income_level) %>% summarize(Mean = round(mean(feelings_life), 4), Q1 = quantile(feelings_life, 0.25), Median = median(feelings_life), Q3 = quantile(feelings_life, 0.75), IQR = IQR(feelings_life), Outliers = sum(feelings_life < quantile(feelings_life, 0.25) - IQR(feelings_life)*1.5 | feelings_life > quantile(feelings_life, 0.75) + IQR(feelings_life)*1.5), "Standard Deviation" = round(sd(feelings_life), 4), Total = n()), caption = "Table 2: Statistics of Satisfaction towards Life (by Income Group)")
 
-# See Figure 2 and Table 2
+# See plot and table
 incfeel_bar
 table2
 
