@@ -74,13 +74,10 @@ centerlines <- tibble(income_level = c("High", "Low"), Mean = c(mean(highinc_age
 # Bar plot for age
 incage_hist <- gssdata %>% 
   ggplot(aes(x = age, group=as.factor(income_level), fill = as.factor(income_level))) + 
-  geom_histogram() +
-  labs(title = "Age Distribution of Each Income Level", x = "Income Level", y = "Count", fill = "Income Level", caption = "Figure 1") +
+  geom_histogram(col = "black") +
+  labs(title = "Age Distribution of Each Income Level", x = "Income Level", y = "Count", fill = "Income Level", caption = "Figure 1", color = "Mean Line") +
   facet_grid(~income_level) +
-  theme_minimal() + theme(plot.title = element_text(hjust = 0.5)) + 
- scale_fill_brewer(palette="Accent") + scale_color_brewer(palette="Accent") + 
- theme(plot.caption = element_text(hjust = 0.5)) + 
- geom_vline(data = centerlines, aes(xintercept = c(Mean)), col = c("red", "blue"), linetype = "dashed")
+  theme_minimal() + theme(plot.title = element_text(hjust = 0.5)) + theme(plot.caption = element_text(hjust = 0.5)) + geom_vline(data = centerlines, aes(xintercept = Mean, colour = income_level), linetype = "dashed", show.legend = TRUE) + scale_fill_brewer(palette = "Accent")
 
 table1 <- kable(gssdata %>% group_by(income_level) %>% summarize("Gen Z (18-20)" = sum(age >= 18 & age <= 20), 
 "Millennials (21-36)" = sum(age >= 21 & age <= 36), 
