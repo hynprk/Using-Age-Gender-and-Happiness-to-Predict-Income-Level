@@ -6,7 +6,13 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+# Install any of these packages if not installed
+## install.packages("arm")
+## install.packages("knitr")
+## install.packages("tidyverse")
+## install.packages(knitr)
+
 # Libraries for this Report
 library(tidyverse)
 library(survey)
@@ -56,26 +62,32 @@ gssdata <-
 gssdata<-
   gssdata%>%
   filter(age>=18)
-
-
+  
 ######################################################################################################
 
 
 # Mean Line
 mean1 <- as.numeric(gssdata %>% filter(income_level=="High") %>% summarise(mean = mean(age)))
 mean2 <- as.numeric(gssdata %>% filter(income_level=="Low") %>% summarise(mean = mean(age)))
+# Median Line
+median1 <- as.numeric(gssdata %>% filter(income_level=="High") %>% summarise(median = median(age)))
+median2 <- as.numeric(gssdata %>% filter(income_level=="Low") %>% summarise(median = median(age)))
 
 # Bar plot for age
 incage_hist <- gssdata %>% 
   ggplot(aes(x = age, group=as.factor(income_level), fill = as.factor(income_level))) + 
   geom_histogram() +
-  scale_fill_brewer(palette="Accent") + 
-  scale_color_brewer(palette="Accent") + 
-  labs(title = "Age For Each Income Level", x = "Income Level", y = "Count", fill = "Income Level") +
+  labs(title = "Age Distribution of Each Income Level", x = "Income Level", y = "Count", fill = "Income Level") +
   facet_grid(~income_level) +
-  theme_minimal() + theme(plot.title = element_text(hjust = 0.5)) +
-  geom_vline(xintercept=c(mean1, mean2), color = c("red", "blue", "red", "blue"), linetype="dashed")
+  theme_minimal() + theme(plot.title = element_text(hjust = 0.5)) + 
+  geom_vline(mapping = aes(xintercept=mean1), colour = "red", linetype = "dashed") + 
+  geom_vline(mapping = aes(xintercept=mean2), colour = "blue", linetype = "dashed") + scale_fill_brewer(palette="Accent") + scale_color_brewer(palette="Accent")
+
+table1 <- kable(gssdata %>% group_by(income_level) %>% summarize("Gen Z (18-20)" = sum(age >= 18 & age <= 20), "Millennials (21-36)" = sum(age >= 21 & age <= 36), "Gen X (37-52)" = sum(age >= 37 & age <= 52), "Mean Age" = round(mean(age), 2), "Median" = round(median(age), 2), "Standard Deviation" = sd(age), Total = n()), caption = "Table 1: Generations in Each Income Group")
+
+# See Figure 1 and Table 1
 incage_hist
+table1
 
 # Bar Plot: Feelings based on Income Group
 incfeel_bar <- gssdata %>% 
