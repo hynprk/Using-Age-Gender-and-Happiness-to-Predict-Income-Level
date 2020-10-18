@@ -7,6 +7,11 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+# Libraries for this Report
+library(tidyverse)
+library(survey)
+library(knitr)
+library(arm)
 
 # Data Cleaning
 gssdata <- read.csv("gss.csv")
