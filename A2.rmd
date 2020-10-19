@@ -94,16 +94,18 @@ table1
 
 ######################################################################################################
 
-# Histogram: Feelings based on Income Group
 incfeel_hist <- gssdata %>% 
   ggplot(aes(x = feelings_life, group = income_level)) +
   geom_histogram(bins = 11, aes(y = stat(width*density), fill = factor(..x..))) +
   facet_grid(~income_level) + scale_fill_brewer(palette="RdYlBu") +
-  geom_text(aes(label = scales::percent(round(..prop.., 3)), y= ..prop..), stat= "count", vjust = -.5, size = 1.5) + 
+  geom_text(aes(label = scales::percent(round(..prop.., 3)), y= ..prop..), stat= "count", vjust = -.5, size = 1) + 
   scale_y_continuous(labels = scales::percent) +
-  labs(title = "Satisfaction towards Life of Each Income Group", x = "Income Level", y = "Proportion", fill = "Satisfaction towards Life", color = "Satisfaction towards Life", caption = "Figure 2") + 
-  theme_minimal() + theme(plot.title = element_text(hjust = 0.5), plot.caption = element_text(hjust = 0.5))
-
+  labs(title = "Satisfaction towards Life of Each Income Group", 
+  x = "Income Level", y = "Proportion", 
+  fill = "Satisfaction towards Life", color = "Satisfaction towards Life", caption = "Figure 2") + 
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5), plot.caption = element_text(hjust = 0.5))
+  
  # Table
 table2 <- kable(gssdata %>% group_by(income_level) %>% summarize(Mean = round(mean(feelings_life), 4), 
 Q1 = quantile(feelings_life, 0.25), 
