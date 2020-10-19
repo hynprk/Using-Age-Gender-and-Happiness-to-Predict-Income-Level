@@ -161,7 +161,7 @@ binnedplot(fitted(gss_glm),
            residuals(gss_glm, type = "response"), 
            xlab = "Expected Values", 
            ylab = "Average residual", 
-           main = "Binned residual plot (18-52, fulltime)",
+           main = "Binned Residual Plot",
            sub = "Figure 4") 
 
 ```
