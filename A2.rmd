@@ -45,17 +45,6 @@ gssdata <- gssdata %>% mutate(income_level = ifelse(income_respondent == "Less t
 # Merge income levels into two values for logistic regression
 gssdata <- gssdata %>% mutate(income_rank = ifelse(income_respondent == "Less than $25,000" | income_respondent == "$25,000 to $49,999", 0, 1))
 
-# change values to midpoint of range
-gssdata <-
-  gssdata %>%
-  mutate(income_respondent = 
-           case_when(income_respondent=="Less than $25,000"~12500,
-                     income_respondent=="$25,000 to $49,999"~37500,
-                     income_respondent=="$50,000 to $74,999"~62500,
-                     income_respondent=="$75,000 to $99,999"~87500,
-                     income_respondent=="$100,000 to $ 124,999"~112500,
-                     income_respondent=="$125,000 and more"~137500))
-
 # Restricting Age to 18 <= age <= 52
 gssdata <-
   gssdata %>%
