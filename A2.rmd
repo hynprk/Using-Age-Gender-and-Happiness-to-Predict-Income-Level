@@ -136,4 +136,32 @@ caption = "Table 3: Statistics of Sex (by Income Group)")
 # See Figure 3 and Table 3
 incsex_bar
 table3
+
+######################################################################################################
+
+#Logistic Model
+
+#Finite population correction
+n=length(gssdata$income_respondent)
+N=30302287
+
+fpc.srs = rep(N,n)
+
+# Regression model
+gss.design <- svydesign(id=~1, data=gssdata, fpc=fpc.srs)
+gss_glm <-svyglm(income_rank~feelings_life+as.factor(sex)+age,gss.design,family="binomial")
+
+# For comparing residual deviance
+gss_glm_nage <-svyglm(income_rank~feelings_life+as.factor(sex),gss.design,family="binomial")
+gss_glm_nsex <-svyglm(income_rank~feelings_life+age,gss.design,family="binomial")
+gss_glm_nfeel <-svyglm(income_rank~as.factor(sex)+age,gss.design,family="binomial")
+
+#Binned residual plot
+binnedplot(fitted(gss_glm), 
+           residuals(gss_glm, type = "response"), 
+           xlab = "Expected Values", 
+           ylab = "Average residual", 
+           main = "Binned residual plot (18-52, fulltime)",
+           sub = "Figure 4") 
+
 ```
