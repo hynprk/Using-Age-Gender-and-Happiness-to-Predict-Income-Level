@@ -56,14 +56,13 @@ gssdata<-
   
 ######################################################################################################
 # Center Lines
-# Center Lines
 highinc_age <- gssdata %>% filter(income_level=="High") %>% dplyr::select(age)
 lowinc_age <- gssdata %>% filter(income_level=="Low") %>% dplyr::select(age)
 centerlines <- tibble(income_level = c("High", "Low"), 
 Mean = c(mean(highinc_age$age), mean(lowinc_age$age)), 
 Median = c(median(highinc_age$age), median(lowinc_age$age)))
 
-# Histogram for age
+# Figure 1: Histogram for age
 incage_hist <- gssdata %>% 
   ggplot(aes(x = age, group=as.factor(income_level), fill = as.factor(income_level))) + 
   geom_histogram(col = "black") +
@@ -90,7 +89,7 @@ table1
 
 ######################################################################################################
 
-# Histogram: Feelings based on Income Group
+# Figure 1: Histogram- Feelings based on Income Group
 incfeel_hist <- gssdata %>% 
   ggplot(aes(x = feelings_life, group = income_level)) +
   geom_histogram(bins = 11, aes(y = stat(width*density), fill = factor(..x..))) +
@@ -118,7 +117,7 @@ table2
 
 ######################################################################################################
 
-# Bar Plot: Sex based on Income Group
+# Figure 3: Bar Plot- Sex based on Income Group
 incsex_bar <- gssdata %>% 
   ggplot(aes(x = sex, group=as.factor(income_level))) + 
   geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
