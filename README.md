@@ -1,4 +1,4 @@
-# STA304-PS2
+# Using Age, Gender, and Happiness to Predict Income Level
 
-## We will do something cool hopefully
+
 
