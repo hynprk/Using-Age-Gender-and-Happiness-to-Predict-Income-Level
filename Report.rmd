@@ -50,7 +50,7 @@ Given these outcomes, we can return to our original dilemma regarding the ambigu
 
 ```{r}
 # Data Cleaning
-gssdata <- read_csv("gss.csv")
+gssdata <- read_csv("data/gss.csv")
 
 #selecting data of interest
 gssdata <- gssdata %>% dplyr::select(age,sex,income_respondent,average_hours_worked,feelings_life)
@@ -342,4 +342,4 @@ set]*. Statistics Canada. Retrieved October 18, 2020, from https://www23.statcan
 
 # Appendix A
 ## *Code*
-Here is the link to our github repository: https://github.com/hynprk/STA304-PS2
+Here is the link to our github repository: https://github.com/hynprk/Using-Age-Gender-and-Happiness-to-Predict-Income-Level
